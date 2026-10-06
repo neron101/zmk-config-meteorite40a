@@ -129,3 +129,6 @@
         triggers-per-rotation = <24>;
     };
 };
+
+/* DYA Studio: trackball speed runtime processor (included last: it redefines RC()) */
+#include <input/processors/runtime-input-processor.dtsi>
