@@ -2,13 +2,13 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
 
 #define DEFAULT_CPI 1000        // トラックボールの感度
 #define ROTATION_ANGLE 30       // トラックボールのY軸を回転
 #define CLIPPER_THRESHOLD 40    // スクロール時に斜めの値をクリップ
 
-#define SCROLL_LAYER_1 2          // スクロールを有効にするレイヤー1
-#define SCROLL_LAYER_2 5          // スクロールを有効にするレイヤー2
+#define SCROLL_LAYER 4            // スクロールを有効にするレイヤー（Scrollレイヤー）
 #define INVERT_X 1              // X軸のスクロールの反転
 #define INVERT_Y 0              // Y軸のスクロールの反転
 
@@ -143,10 +143,11 @@
         device = <&trackball>;
 
         input-processors = <&sensor_rotation>,
-                           <&motion_scaler>;
+                           <&motion_scaler>,
+                           <&mouse_runtime_input_processor>; // DYA Studioから速度変更可
 
         scroll {
-            layers = <SCROLL_LAYER_1 SCROLL_LAYER_2>;
+            layers = <SCROLL_LAYER>;
             input-processors = <&sensor_rotation>,
                                <&xy_clipper>,
                                <&to_wheel>;
